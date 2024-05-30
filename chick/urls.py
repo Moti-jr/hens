@@ -26,6 +26,7 @@ urlpatterns = [
     
     path('', views.home, name='home'),
     path('shop/', views.shop, name='shop'),
+     path('upload/', upload_product, name='upload_product'),
     # path('',include("chick.urls")),
    
     path('admin/', admin.site.urls),
