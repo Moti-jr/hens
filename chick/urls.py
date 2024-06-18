@@ -26,9 +26,9 @@ urlpatterns = [
     
     path('', views.home, name='home'),
     path('shop/', views.shop, name='shop'),
-     path('upload/', upload_product, name='upload_product'),
+    path('upload_product/',views. upload_product, name='upload_product'),
     # path('',include("chick.urls")),
    
     path('admin/', admin.site.urls),
-]
-urlpatterns += staticfiles_urlpatterns()
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+   

@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+from django.contrib import messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,8 +41,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main_app',
+    "crispy_forms",
+    "crispy_bootstrap5",
+   
+   
     # 'django.contrib.statics',
 ]
+
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -121,10 +129,21 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT=BASE_DIR /'statics'
-MEDIA_URL ='/images/'
-MEDIA_ROOT=os.path.join(BASE_DIR,'static/assets/img')
+MEDIA_URL ='/media/'
+MEDIA_ROOT=os.path.join(BASE_DIR,'media/')
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'statics/assets'),)
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+MESSAGE_TAGS = {
+    messages.ERROR: "alert-danger",
+    messages.SUCCESS: "alert-success",
+    messages.WARNING: "alert-warning",
+    messages.INFO: "alert-info",
+}

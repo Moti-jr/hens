@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render 
-from forms import ProductForm
+from main_app.app_forms import ProductForm
+from django.contrib import messages
 
 # Create your views here.
 
@@ -13,11 +14,14 @@ def shop(request):
 
 
 def upload_product(request):
+  
     if request.method == 'POST':
+       
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('product_list')  # Redirect to a view displaying the product list
+            messages.success(request, 'product saved successfully')
+            return redirect('home')  # Redirect to a view displaying the product list
     else:
         form = ProductForm()
     return render(request, 'upload_product.html', {'form': form})

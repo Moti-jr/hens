@@ -1,3 +1,5 @@
+import os
+import uuid
 from django.db import models
 from django.contrib.auth.models import User
 from django.shortcuts import render
@@ -19,6 +21,14 @@ class Customer(models.Model):
     # def product_list(request):
     #     products = Product.objects.all()
     #     return render(request, 'product_list.html', {'products': products})
+
+
+def generate_unique_name(instance, filename):
+    name = uuid.uuid4()  # universally unique id
+    ext = filename.split('.')[-1]
+    full_filename = f'{name}.{ext}'  # formating the files
+   # full_filename='%s.%s' %(name,ext)
+    return os.path.join("pimages", full_filename)
 
 
 class Category(models.Model):
@@ -43,7 +53,7 @@ class Product(models.Model):
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     stock = models.PositiveIntegerField(default=0)
-    image = models.ImageField(upload_to='products/', blank=True)  # Optional image field
+    image = models.ImageField(upload_to=generate_unique_name, null=True, blank=True)  # Optional image field
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     unit = models.ForeignKey(Unit, on_delete=models.CASCADE)
 

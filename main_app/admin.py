@@ -6,6 +6,8 @@ admin.site.site_header = 'Moti Store'
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['name', 'category', 'stock','price']
     search_fields=('name', 'stock','unit')
+    list_filter = ["stock",'name']
+    list_per_page = 50
     
     
 # Register your models here.
